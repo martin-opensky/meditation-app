@@ -1,0 +1,18 @@
+{
+  "name": "Simply Meditate",
+  "short_name": "Meditate!",
+  "theme_color": "#ffffff",
+  "background_color": "#004740",
+  "display": "fullscreen",
+  "orientation": "portrait",
+  "scope": "/",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "icons/flower-of-life.png",
+      "sizes": "any",
+      "type": "image/png"
+    }
+  ],
+  "splash_pages": null
+}
