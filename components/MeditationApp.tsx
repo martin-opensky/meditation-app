@@ -55,7 +55,9 @@ export default function MeditationApp({ onClick }: any) {
     // setMeditationFinished(false);
     cancelAnimationFrame(timerRef.current);
     audio?.pause();
-    audio.currentTime = 0;
+    if (audio) {
+      audio.currentTime = 0;
+    }
   };
 
   const startMediation = () => {
