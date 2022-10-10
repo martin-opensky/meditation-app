@@ -2,22 +2,6 @@ import { useEffect, useRef, useState } from "react";
 import PlayIcon from "../components/PlayIcon";
 import StopIcon from "../components/StopIcon";
 
-const useRequestAnimationFrame = (callback) => {
-  const requestRef = useRef(0);
-  const previousTimeRef = useRef();
-
-  const animate = (time) => {
-    if (previousTimeRef.current) callback(time - previousTimeRef.current);
-    previousTimeRef.current = time;
-    requestRef.current = requestAnimationFrame(animate);
-  };
-
-  useEffect(() => {
-    requestRef.current = requestAnimationFrame(animate);
-    return () => cancelAnimationFrame(requestRef.current);
-  }, []);
-};
-
 export default function MeditationApp({ onClick }: any) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState("00:00");
@@ -62,8 +46,8 @@ export default function MeditationApp({ onClick }: any) {
 
   const startMediation = () => {
     // Set finish time based on meditation length
-    // const finishTime = new Date().getTime() + meditationLength * 60000 + 1000;
-    const finishTime = new Date().getTime() + 36000;
+    const finishTime = new Date().getTime() + meditationLength * 60000 + 1000;
+    // const finishTime = new Date().getTime() + 36000;
 
     setMeditationFinishTime(finishTime);
     setIsPlaying(true);
