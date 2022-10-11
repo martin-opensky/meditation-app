@@ -141,10 +141,12 @@ export default function MeditationApp({ onClick }: any) {
         <>
           <div className="text-center font-bold text-3xl">
             <input
-              type="number"
+              type="input"
               value={meditationLength}
-              onChange={(e) => setMeditationLength(parseInt(e.target.value))}
-              className="w-14 text-center"
+              onChange={(e) =>
+                setMeditationLength(parseInt(e.target.value) || 0)
+              }
+              className="w-12 text-center"
             />
             minutes
           </div>
@@ -199,7 +201,11 @@ export default function MeditationApp({ onClick }: any) {
             </div>
           </div>
           <div className="grid place-items-center ">
-            <PlayIcon onClick={() => startMediation()} />
+            {meditationLength ? (
+              <PlayIcon onClick={() => startMediation()} />
+            ) : (
+              <></>
+            )}
           </div>
         </>
       )}
