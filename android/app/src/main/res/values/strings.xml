@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Simply Meditate</string>
+    <string name="title_activity_main">Simply Meditate</string>
+    <string name="package_name">com.meditate.martincreedy.co.uk</string>
+    <string name="custom_url_scheme">com.meditate.martincreedy.co.uk</string>
+</resources>
