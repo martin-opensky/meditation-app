@@ -6,7 +6,7 @@ export default function MeditationApp({ onClick }: any) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState("00:00");
   const [audio, setAudio] = useState<HTMLAudioElement>();
-  const [meditationLength, setMeditationLength] = useState(30);
+  const [meditationLength, setMeditationLength] = useState(60);
   const [meditationFinishTime, setMeditationFinishTime] = useState(0);
   const [meditationFinished, setMeditationFinished] = useState(false);
   const [currentAudioFileName, setCurrentAudioFileName] = useState("");
