@@ -1,4 +1,3 @@
-import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
 import PlayIcon from "../components/PlayIcon";
 import StopIcon from "../components/StopIcon";
@@ -13,7 +12,6 @@ export default function MeditationApp({ onClick }: any) {
   const [currentAudioFileName, setCurrentAudioFileName] = useState("");
   const [audioDuration, setAudioDuration] = useState(0);
   const timerRef = useRef<any>();
-  const router = useRouter();
 
   useEffect(() => {
     const func = () => {
