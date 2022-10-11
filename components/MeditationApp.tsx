@@ -213,7 +213,7 @@ export default function MeditationApp({ onClick }: any) {
         <em className="text-gray-400">{currentAudioFileName}</em>
       </div>
       <div className="grid place-items-center py-48">
-        <em className="text-gray-200">v0.2</em>
+        <em className="text-gray-200">v0.2.1</em>
       </div>
     </div>
   );
