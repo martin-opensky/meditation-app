@@ -10,7 +10,6 @@ export default function MeditationApp({ onClick }: any) {
   const [meditationFinishTime, setMeditationFinishTime] = useState(0);
   const [meditationFinished, setMeditationFinished] = useState(false);
   const [currentAudioFileName, setCurrentAudioFileName] = useState("");
-  const [audioDuration, setAudioDuration] = useState(0);
   const timerRef = useRef<any>();
 
   useEffect(() => {
@@ -38,14 +37,7 @@ export default function MeditationApp({ onClick }: any) {
       audioFiles[Math.floor(Math.random() * audioFiles.length)];
 
     setCurrentAudioFileName(randomAudioFile);
-
-    const tempAudio = new Audio(`/audio/${randomAudioFile}.mp3`);
-    setAudio(tempAudio);
-
-    tempAudio.addEventListener("loadeddata", function () {
-      setAudioDuration(this.duration);
-      console.log("audioDuration", this.duration);
-    });
+    setAudio(new Audio(`/audio/${randomAudioFile}.mp3`));
   }, []);
 
   const stopMediation = () => {
