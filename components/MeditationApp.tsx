@@ -9,6 +9,8 @@ export default function MeditationApp({ onClick }: any) {
   const [meditationLength, setMeditationLength] = useState(30);
   const [meditationFinishTime, setMeditationFinishTime] = useState(0);
   const [meditationFinished, setMeditationFinished] = useState(false);
+  const [currentAudioFileName, setCurrentAudioFileName] = useState("");
+  const [audioDuration, setAudioDuration] = useState(0);
   const timerRef = useRef<any>();
 
   useEffect(() => {
@@ -30,7 +32,20 @@ export default function MeditationApp({ onClick }: any) {
   }, [isPlaying]);
 
   useEffect(() => {
-    setAudio(new Audio("/audio/singing-pyramid-77.mp3"));
+    // random selection from array
+    const audioFiles = ["77", "124", "200", "280", "444", "555", "666"];
+    const randomAudioFile =
+      audioFiles[Math.floor(Math.random() * audioFiles.length)];
+
+    setCurrentAudioFileName(randomAudioFile);
+
+    const tempAudio = new Audio(`/audio/${randomAudioFile}.mp3`);
+    setAudio(tempAudio);
+
+    tempAudio.addEventListener("loadeddata", function () {
+      setAudioDuration(this.duration);
+      console.log("audioDuration", this.duration);
+    });
   }, []);
 
   const stopMediation = () => {
@@ -39,6 +54,7 @@ export default function MeditationApp({ onClick }: any) {
     // setMeditationFinished(false);
     cancelAnimationFrame(timerRef.current);
     audio?.pause();
+
     if (audio) {
       audio.currentTime = 0;
     }
@@ -47,7 +63,7 @@ export default function MeditationApp({ onClick }: any) {
   const startMediation = () => {
     // Set finish time based on meditation length
     const finishTime = new Date().getTime() + meditationLength * 60000 + 1000;
-    // const finishTime = new Date().getTime() + 36000;
+    // const finishTime = new Date().getTime() + 35000;
 
     setMeditationFinishTime(finishTime);
     setIsPlaying(true);
@@ -55,16 +71,20 @@ export default function MeditationApp({ onClick }: any) {
   };
 
   const finishMeditation = () => {
-    cancelAnimationFrame(timerRef.current);
-    audio?.play();
+    if (!meditationFinished) {
+      cancelAnimationFrame(timerRef.current);
+      audio?.play();
+    }
 
-    setInterval(() => {
+    setTimeout(() => {
+      console.log("finishMeditation setTimeout");
+
       if (isPlaying) {
         setIsPlaying(false);
         setMeditationFinishTime(0);
         setMeditationFinished(false);
       }
-    }, 30000);
+    });
   };
 
   const calculateTimeRemaining = () => {
@@ -80,8 +100,7 @@ export default function MeditationApp({ onClick }: any) {
     );
     let seconds: number = Math.floor((distance % (1000 * 60)) / 1000);
 
-    if (hours == 0 && minutes == 0 && seconds == 0) {
-      console.log("finished - all 0");
+    if (hours <= 0 && minutes <= 0 && seconds <= 0) {
       setMeditationFinished(true);
       finishMeditation();
       return;
@@ -109,11 +128,6 @@ export default function MeditationApp({ onClick }: any) {
     }
   };
 
-  // TODO:
-  // Create GIT repo to deploy
-  // Deploy on Vercel
-  // Install PWA on phone
-
   return (
     <div>
       ​
@@ -123,16 +137,17 @@ export default function MeditationApp({ onClick }: any) {
             <>...</>
           ) : (
             <>
-              <div className="py-5 text-center font-bold text-3xl">
+              <div className="text-center font-bold text-3xl py-5">
                 {timeRemaining}
               </div>
+
               <StopIcon onClick={() => stopMediation()} />
             </>
           )}
         </div>
       ) : (
         <>
-          <div className="py-5 text-center font-bold text-3xl">
+          <div className="text-center font-bold text-3xl">
             <input
               type="number"
               value={meditationLength}
@@ -141,13 +156,21 @@ export default function MeditationApp({ onClick }: any) {
             />
             minutes
           </div>
-          <div className="flex justify-center">
+          <div className="flex justify-center py-5">
+            <div className="p-1">
+              <span
+                className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
+                onClick={() => setMeditationLength(10)}
+              >
+                10
+              </span>
+            </div>
             <div className="p-1">
               <span
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(20)}
               >
-                20 mins
+                20
               </span>
             </div>
             <div className="p-1">
@@ -155,7 +178,7 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(30)}
               >
-                30 mins
+                30
               </span>
             </div>
             <div className="p-1">
@@ -163,7 +186,7 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(45)}
               >
-                45 mins
+                45
               </span>
             </div>
             <div className="p-1">
@@ -171,15 +194,29 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(60)}
               >
-                60 mins
+                60
+              </span>
+            </div>
+            <div className="p-1">
+              <span
+                className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
+                onClick={() => setMeditationLength(90)}
+              >
+                90
               </span>
             </div>
           </div>
-          <div className="grid place-items-center py-5">
+          <div className="grid place-items-center ">
             <PlayIcon onClick={() => startMediation()} />
           </div>
         </>
       )}
+      <div className="grid place-items-center py-5">
+        <em className="text-gray-400">{currentAudioFileName}</em>
+      </div>
+      <div className="grid place-items-center py-48">
+        <em className="text-gray-200">v0.2</em>
+      </div>
     </div>
   );
 }
