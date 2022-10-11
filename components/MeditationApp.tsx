@@ -200,7 +200,7 @@ export default function MeditationApp({ onClick }: any) {
             <div className="p-1">
               <span
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
-                onClick={() => setMeditationLength(60)}
+                onClick={() => setMeditationLength(90)}
               >
                 90
               </span>
