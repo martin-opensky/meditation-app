@@ -162,9 +162,17 @@ export default function MeditationApp({ onClick }: any) {
             <div className="p-1">
               <span
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
+                onClick={() => setMeditationLength(10)}
+              >
+                10
+              </span>
+            </div>
+            <div className="p-1">
+              <span
+                className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(20)}
               >
-                20 mins
+                20
               </span>
             </div>
             <div className="p-1">
@@ -172,7 +180,7 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(30)}
               >
-                30 mins
+                30
               </span>
             </div>
             <div className="p-1">
@@ -180,7 +188,7 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(45)}
               >
-                45 mins
+                45
               </span>
             </div>
             <div className="p-1">
@@ -188,7 +196,15 @@ export default function MeditationApp({ onClick }: any) {
                 className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
                 onClick={() => setMeditationLength(60)}
               >
-                60 mins
+                60
+              </span>
+            </div>
+            <div className="p-1">
+              <span
+                className="inline-flex items-center rounded-full bg-yellow-100 px-3 py-0.5 text-sm font-medium text-yellow-800 cursor-pointer"
+                onClick={() => setMeditationLength(60)}
+              >
+                90
               </span>
             </div>
           </div>
@@ -199,6 +215,9 @@ export default function MeditationApp({ onClick }: any) {
       )}
       <div className="grid place-items-center py-5">
         <em className="text-gray-400">{currentAudioFileName}</em>
+      </div>
+      <div className="grid place-items-center py-48">
+        <em className="text-gray-200">v0.2</em>
       </div>
     </div>
   );
