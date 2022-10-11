@@ -62,8 +62,8 @@ export default function MeditationApp({ onClick }: any) {
 
   const startMediation = () => {
     // Set finish time based on meditation length
-    // const finishTime = new Date().getTime() + meditationLength * 60000 + 1000;
-    const finishTime = new Date().getTime() + 35000;
+    const finishTime = new Date().getTime() + meditationLength * 60000 + 1000;
+    // const finishTime = new Date().getTime() + 35000;
 
     setMeditationFinishTime(finishTime);
     setIsPlaying(true);
